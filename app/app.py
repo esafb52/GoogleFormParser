@@ -3,14 +3,13 @@ from flask import Flask, flash, redirect, request, send_from_directory, current_
 from flask import render_template
 from werkzeug.utils import secure_filename
 
+from app.configs import ALLOWED_EXTENSIONS, UPLOAD_FOLDER, SECRET_KEY
 from app.CsvParser import save_answer, get_form_result
 
-UPLOAD_FOLDER = 'static/uploads'
-ALLOWED_EXTENSIONS = {'csv'}
-
+ALLOWED_EXTENSIONS = ALLOWED_EXTENSIONS
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-app.secret_key = "das'@fdgsdf#345r43kl34k53#$%#$^#^#634dja;shasdeasdadas"
+app.secret_key = SECRET_KEY
 
 
 def allowed_file(filename):
