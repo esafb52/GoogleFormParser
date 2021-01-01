@@ -2,7 +2,8 @@ import os
 from flask import Flask, flash, redirect, request, send_from_directory, current_app
 from flask import render_template
 from werkzeug.utils import secure_filename
-from CsvParser import save_answer, get_form_result
+
+from app.CsvParser import save_answer, get_form_result
 
 UPLOAD_FOLDER = 'static/uploads'
 ALLOWED_EXTENSIONS = {'csv'}
