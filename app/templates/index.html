@@ -45,6 +45,8 @@
                                 <button class="btn btn-primary ml-2 mx-2" id="inputGroupFileAddon01" type="submit"><i
                                         class="fas fa-upload mr-1"></i>آپلود فایل
                                 </button>
+
+
                             </div>
                         </form>
                     </div>
@@ -87,8 +89,10 @@
                                         <tbody>
                                         {% for answer in data.answers %}
                                             {% if '@@@' in answer %}
-                                                <td style="direction: rtl; text-align: center; background-color: #E2E6A1 "></td>
-                                                <td style="direction: rtl; text-align: center; background-color: #E2E6A1 ">{{ 'دانش آموز جدید' }}</td>
+                                                <td
+                                                        style="direction: rtl; text-align: center; background-color: #cce5ff"></td>
+                                                <td
+                                                        style="direction: rtl; text-align: center; background-color: #cce5ff ">{{ 'دانش آموز جدید' }}</td>
                                             {% else %}
                                                 <tr>
                                                     <td style="direction: rtl; text-align: center">{{ loop.index }}</td>

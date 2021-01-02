@@ -40,6 +40,9 @@ def file_upload():
 def index():
     answers, students = get_form_result()
     count = len(students)
+
+    files = os.listdir('app/uploads')
+    print(files)
     return render_template('index.html', data={'answers': answers, 'students': students, 'count': count})
 
 
