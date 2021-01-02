@@ -61,7 +61,7 @@ def get_form_result():
     counter = 0
     input_file = UPLOAD_BASE_DIR + 'last_result.csv'
     if not os.path.exists(input_file):
-        return []
+        return [], []
     with open(input_file, encoding='utf-8') as csv_file:
         answers = csv.reader(csv_file, delimiter=',', quotechar='"')
         for answer in answers:

@@ -16,8 +16,9 @@
     <a class="navbar-brand" href="/">
         <img src="{{ url_for('static', filename='logo.png') }}" class="img-fluid"/>
     </a>
-    <a class="text-white" href="/download"> دانلود نتایج</a>
-
+    {% if data.count>0 %}
+        <a class="text-white" href="/download"> دانلود نتایج</a>
+    {% endif %}
 </nav>
 
 <br>
