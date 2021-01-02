@@ -13,7 +13,7 @@ def clean_extra_char(input_text):
         .replace('\n', ' ')
 
 
-def save_answer(file_name):
+def process_and_save_answers(file_name):
     students = []
     lst_res = []
     new_student_mode = False
@@ -54,7 +54,7 @@ def save_answer(file_name):
         out_file.close()
 
 
-def get_form_result():
+def get_exam_form_result():
     students = []
     lst_res = []
     new_student_mode = False

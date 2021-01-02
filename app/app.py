@@ -4,11 +4,10 @@ from flask import render_template
 from werkzeug.utils import secure_filename
 
 from app.configs import ALLOWED_EXTENSIONS, UPLOAD_FOLDER, SECRET_KEY
-from app.CsvParser import save_answer, get_form_result
+from app.CsvParser import process_and_save_answers, get_exam_form_result
 
-ALLOWED_EXTENSIONS = ALLOWED_EXTENSIONS
 app = Flask(__name__)
-app.config['UPLOAD_FOLDER'] = 'app/uploads'
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.secret_key = SECRET_KEY
 
 
@@ -16,36 +15,33 @@ def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
-@app.route('/upload', methods=['GET', 'POST'])
+@app.route('/upload', methods=['POST'])
 def file_upload():
-    if request.method == 'POST':
-        if 'file' not in request.files:
-            flash('No file part', 'danger')
-            return redirect('/')
-        file = request.files['file']
-        if file.filename == '':
-            flash('فایلی انتخاب نشده است ', 'danger')
-            return redirect('/')
-        if file and allowed_file(file.filename):
-            filename = secure_filename(file.filename)
-            filename.replace(' ', '_')  # no space in filenames! because we will call them as command line arguments
-            file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-            file.save(file_path)
-            save_answer(filename)
-            flash('فایل با موفقیت تبدیل شد ', 'info')
-            return redirect('/')
-        else:
-            flash('فرمت فایل انتخابی صحیح نمی باشد ', 'info')
-            return redirect('/')
+    if 'file' not in request.files:
+        flash('فایلی انتخاب نشده است ', 'danger')
+        return redirect('/')
+    file = request.files['file']
+    if file.filename == '':
+        flash('فایلی انتخاب نشده است ', 'danger')
+        return redirect('/')
+    if file and allowed_file(file.filename):
+        filename = secure_filename(file.filename)
+        file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename.replace(' ', '_'))
+        file.save(file_path)
+
+        # start process answer
+        process_and_save_answers(filename)
+        flash('فایل با موفقیت تبدیل شد ', 'info')
+        return redirect('/')
+    else:
+        flash('فرمت فایل انتخابی صحیح نمی باشد ', 'info')
+        return redirect('/')
 
 
 @app.route('/')
 def index():
-    answers, students = get_form_result()
+    answers, students = get_exam_form_result()
     count = len(students)
-
-    files = os.listdir('app/uploads')
-    print(files)
     return render_template('index.html', data={'answers': answers, 'students': students, 'count': count})
 
 
