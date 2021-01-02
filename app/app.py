@@ -34,6 +34,9 @@ def file_upload():
             save_answer(filename)
             flash('فایل با موفقیت تبدیل شد ', 'info')
             return redirect('/')
+        else:
+            flash('فرمت فایل انتخابی صحیح نمی باشد ', 'info')
+            return redirect('/')
 
 
 @app.route('/')
