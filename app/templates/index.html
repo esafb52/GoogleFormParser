@@ -54,6 +54,12 @@
             {% if data.answers %}
                 <div class="col-xl-12 mt-4">
                     <div class="card mb-12">
+                        <div class="card mb-4" style="padding: 40px;text-align: justify;line-height: 40px">
+
+                            {% for student in data.students %}
+                                {{ student }}
+                            {% endfor %}
+                        </div>
                         <div class="card mb-4">
 
                             <div class="card-header"><i class="fas fa-table mr-1 text-center"></i> پاسخ دانش آموزان

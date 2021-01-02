@@ -2,6 +2,8 @@ import csv
 import os
 from shutil import copyfile
 
+UPLOAD_BASE_DIR = 'app/uploads/'
+
 
 def clean_extra_char(input_text):
     return str(input_text) \
@@ -17,10 +19,10 @@ def save_answer(file_name):
     new_student_mode = False
     counter = 0
 
-    input_file = 'static/uploads/' + file_name
-    last_result_from_input_file = 'static/uploads/' + 'last_result.csv'
+    input_file = UPLOAD_BASE_DIR + file_name
+    last_result_from_input_file = UPLOAD_BASE_DIR + 'last_result.csv'
     copyfile(input_file, last_result_from_input_file)
-    out_path = 'static/uploads/answer.txt'
+    out_path = UPLOAD_BASE_DIR + 'answer.txt'
     out_file = open(out_path, mode='w', encoding='utf-8')
     if not os.path.exists(input_file):
         return []
@@ -53,10 +55,11 @@ def save_answer(file_name):
 
 
 def get_form_result():
+    students = []
     lst_res = []
     new_student_mode = False
     counter = 0
-    input_file = 'static/uploads/last_result.csv'
+    input_file = UPLOAD_BASE_DIR + 'last_result.csv'
     if not os.path.exists(input_file):
         return []
     with open(input_file, encoding='utf-8') as csv_file:
@@ -70,9 +73,10 @@ def get_form_result():
                     continue
                 if new_student_mode:
                     lst_res.append('@@@')
+                    students.append(item + " | ")
                     new_student_mode = False
                 if result:
                     counter += 1
                     final_answer = ' پاسخ سوال ' + str(counter) + ' : ' + result
                     lst_res.append(final_answer)
-    return lst_res
+    return lst_res, students

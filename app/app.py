@@ -8,7 +8,7 @@ from app.CsvParser import save_answer, get_form_result
 
 ALLOWED_EXTENSIONS = ALLOWED_EXTENSIONS
 app = Flask(__name__)
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.config['UPLOAD_FOLDER'] = 'app/uploads'
 app.secret_key = SECRET_KEY
 
 
@@ -38,8 +38,8 @@ def file_upload():
 
 @app.route('/')
 def index():
-    answers = get_form_result()
-    return render_template('index.html', data={'answers': answers})
+    answers, students = get_form_result()
+    return render_template('index.html', data={'answers': answers, 'students': students})
 
 
 @app.route('/download', methods=['GET'])
