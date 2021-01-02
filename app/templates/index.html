@@ -53,16 +53,25 @@
 
             {% if data.answers %}
                 <div class="col-xl-12 mt-4">
+
                     <div class="card mb-12">
+                        <h4 class="card-header text-center">لیست دانش آموزان شرکت کننده در آزمون</h4>
                         <div class="card mb-4" style="padding: 40px;text-align: justify;line-height: 40px">
 
                             {% for student in data.students %}
                                 {{ student }}
                             {% endfor %}
+                            <h5 class="text-center mt-5"> تعداد شرکت کنندگان : {{ data.count }}</h5>
                         </div>
+                    </div>
+                </div>
+                <div class="col-xl-12 mt-4">
+
+                    <div class="card mb-12">
+
                         <div class="card mb-4">
 
-                            <div class="card-header"><i class="fas fa-table mr-1 text-center"></i> پاسخ دانش آموزان
+                            <div class="card-header"><h4 class="fas fa-table mr-1 text-center"> پاسخ دانش آموزان</h4>
                             </div>
                             <div class="card-body">
 

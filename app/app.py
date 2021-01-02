@@ -39,7 +39,8 @@ def file_upload():
 @app.route('/')
 def index():
     answers, students = get_form_result()
-    return render_template('index.html', data={'answers': answers, 'students': students})
+    count = len(students)
+    return render_template('index.html', data={'answers': answers, 'students': students, 'count': count})
 
 
 @app.route('/download', methods=['GET'])
