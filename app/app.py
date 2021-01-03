@@ -26,9 +26,12 @@ def file_upload():
         return redirect('/')
     if file and allowed_file(file.filename):
         filename = secure_filename(file.filename)
-        file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename.replace(' ', '_'))
-        if not os.path.exists(UPLOAD_FOLDER):
-            os.mkdir(UPLOAD_FOLDER)
+        filename.replace(' ', '_')
+        upload_path = os.path.join(current_app.root_path, app.config['UPLOAD_FOLDER'])
+        print(upload_path)
+        file_path = os.path.join(upload_path, filename)
+        if not os.path.exists(upload_path):
+            os.mkdir(upload_path)
         file.save(file_path)
         process_and_save_answers(filename)  # start process answer
         flash('فایل با موفقیت تبدیل شد ', 'info')
@@ -48,6 +51,7 @@ def index():
 @app.route('/download', methods=['GET'])
 def download():
     uploads = os.path.join(current_app.root_path, app.config['UPLOAD_FOLDER'])
+    print(uploads)
     filename = 'answer.txt'
     if os.path.exists(uploads + '/' + filename):
         return send_from_directory(directory=uploads, filename=filename)

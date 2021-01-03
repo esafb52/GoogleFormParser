@@ -3,6 +3,7 @@ import os
 from shutil import copyfile
 
 UPLOAD_BASE_DIR = 'uploads/'
+STUDENT_SEP = '@'
 
 
 def clean_extra_char(input_text):
@@ -72,7 +73,7 @@ def get_exam_form_result():
                     new_student_mode = True
                     continue
                 if new_student_mode:
-                    lst_res.append('@@@' + item)
+                    lst_res.append(STUDENT_SEP + item)
                     students.append(item)
                     new_student_mode = False
                 if result:
