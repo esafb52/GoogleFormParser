@@ -1,3 +1,3 @@
 SECRET_KEY = 'your sec key'
-UPLOAD_FOLDER = 'app/uploads'
+UPLOAD_FOLDER = 'uploads'
 ALLOWED_EXTENSIONS = {'csv'}

@@ -27,10 +27,10 @@ def file_upload():
     if file and allowed_file(file.filename):
         filename = secure_filename(file.filename)
         file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename.replace(' ', '_'))
+        if not os.path.exists(UPLOAD_FOLDER):
+            os.mkdir(UPLOAD_FOLDER)
         file.save(file_path)
-
-        # start process answer
-        process_and_save_answers(filename)
+        process_and_save_answers(filename)  # start process answer
         flash('فایل با موفقیت تبدیل شد ', 'info')
         return redirect('/')
     else:

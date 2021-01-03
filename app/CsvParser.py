@@ -2,7 +2,7 @@ import csv
 import os
 from shutil import copyfile
 
-UPLOAD_BASE_DIR = 'app/uploads/'
+UPLOAD_BASE_DIR = 'uploads/'
 
 
 def clean_extra_char(input_text):
