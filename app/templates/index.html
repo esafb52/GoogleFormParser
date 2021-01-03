@@ -59,10 +59,12 @@
 
                     <div class="card mb-12">
                         <h4 class="card-header text-center">لیست دانش آموزان شرکت کننده در آزمون</h4>
-                        <div class="card mb-4" style="padding: 40px;text-align: justify;line-height: 40px">
+                        <div class="card mb-4"
+                             style="padding: 40px;text-align: justify;line-height: 40px;">
 
                             {% for student in data.students %}
-                                {{ student }}
+                                <a class="mx-3" href="#@@@{{ student }}" style="display: inline-block">{{ student }}</a>
+
                             {% endfor %}
                             <h5 class="text-center mt-5"> تعداد شرکت کنندگان : {{ data.count }}</h5>
                         </div>
@@ -92,8 +94,8 @@
                                             {% if '@@@' in answer %}
                                                 <td
                                                         style="direction: rtl; text-align: center; background-color: #cce5ff"></td>
-                                                <td
-                                                        style="direction: rtl; text-align: center; background-color: #cce5ff ">{{ 'دانش آموز جدید' }}</td>
+                                                <td id="{{ answer }}"
+                                                    style="direction: rtl; text-align: center; background-color: #cce5ff ">{{ 'دانش آموز جدید' }}</td>
                                             {% else %}
                                                 <tr>
                                                     <td style="direction: rtl; text-align: center">{{ loop.index }}</td>

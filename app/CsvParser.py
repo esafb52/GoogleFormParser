@@ -72,11 +72,12 @@ def get_exam_form_result():
                     new_student_mode = True
                     continue
                 if new_student_mode:
-                    lst_res.append('@@@')
-                    students.append(item + " | ")
+                    lst_res.append('@@@' + item)
+                    students.append(item)
                     new_student_mode = False
                 if result:
                     counter += 1
                     final_answer = ' پاسخ سوال ' + str(counter) + ' : ' + result
                     lst_res.append(final_answer)
+    students.sort()
     return lst_res, students
